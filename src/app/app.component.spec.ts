@@ -1,35 +1,27 @@
-import { TestBed, async } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
+import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { CameraComponent } from './components/camera.component';
+import { HomeComponent } from './components/home.component';
 
 describe('AppComponent', () => {
+  let fixture:ComponentFixture<AppComponent>;
+  let app:any;
+
   beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule
-      ],
-      declarations: [
-        AppComponent
-      ],
-    }).compileComponents();
+      TestBed.configureTestingModule({
+          declarations: [
+              AppComponent, CameraComponent, HomeComponent
+          ],
+      }).compileComponents();
+      fixture = TestBed.createComponent(AppComponent);
+      app = fixture.debugElement.componentInstance;
   }));
 
   it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app).toBeTruthy();
+      expect(app).toBeTruthy();
   });
 
   it(`should have as title 'mars-photos'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('mars-photos');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('mars-photos app is running!');
+      expect(app.title).toEqual('mars-photos');
   });
 });
