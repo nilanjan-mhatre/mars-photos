@@ -1,1 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+.header {
+    height: 10%;
+}
+
+.collage {
+    background-color: gray;
+    height: 70%;
+    position: fixed;
+    width: 80%;
+    padding: 5%;
+    margin: 5%;
+}

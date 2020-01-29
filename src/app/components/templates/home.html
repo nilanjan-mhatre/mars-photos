@@ -1,3 +1,14 @@
-<h1>Curiosity Images</h1>
-<h3>Launched:{{launchDate}}</h3><br/>
-<h3>Landed:{{landDate}}</h3>
+<div [ngClass]="['header']">
+	<h1>Curiosity Images</h1>
+	<h3>Launched:{{launchDate}}</h3>
+	<h3>Landed:{{landDate}}</h3>
+</div>
+
+<div [ngClass]="['collage']">
+	<div [ngClass]="['filters']">
+		<ng-multiselect-dropdown [placeholder]="'Camera List'" [data]="cameraList" [(ngModel)]="selectedCameraList"
+			[settings]="settings" (onSelect)="onCameraSelect($event)" (onSelectAll)="onSelectAll($event)">
+
+		</ng-multiselect-dropdown>
+	</div>
+</div>
