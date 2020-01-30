@@ -5,9 +5,22 @@
 
 .collage {
     background-color: gray;
-    height: 70%;
-    position: fixed;
-    width: 80%;
-    padding: 5%;
-    margin: 5%;
+    height: fit-content;
+    width: 95%;
+    padding: 1%;
+    margin: 1%;
+}
+
+.filters {
+    background-color: white;
+    padding: 1%;
+    margin: 2%;
+    height: fit-content;
+}
+
+.filter {
+    float: left;
+    width: 30%;
+    height: 100%;
+    margin-left: 5%;
 }
