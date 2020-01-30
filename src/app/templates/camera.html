@@ -1,0 +1,8 @@
+<h2>{{cameraPictures.cameraFullName}}</h2>
+<h3>Total Images: {{cameraPictures.imageUrl.length}}</h3>
+
+<button id="prev" class="img" (click)="previousImage($event)" type="button">prev</button>
+<div class="img-container">
+    <img [src]="currentImage" class="img" style="width:100%">
+</div>
+<button id="next" class="img" (click)="nextImage($event)" type="button">next</button>

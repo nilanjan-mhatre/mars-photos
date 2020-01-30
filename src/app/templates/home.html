@@ -5,15 +5,7 @@
 </div>
 
 <div [ngClass]="['filters']">
-	<div [ngClass]="['filter']">
-		<ng-multiselect-dropdown
-				[placeholder]="'Camera List'"
-				[data]="cameraList"
-				[(ngModel)]="selectedCameras"
-				[settings]="dropdownSettings">
-		</ng-multiselect-dropdown>
-	</div>
-	<div [ngClass]="['filter']">
+	<div [ngClass]="['filter', 'text-input']">
 		<input type="text"
 			ng-model="selectedSol"
 			type="number"
@@ -22,7 +14,18 @@
 			max="{{marsRover.maxSol}}"
 			required="true">
 	</div>
+	<div [ngClass]="['filter', 'drop-down']">
+		<ng-multiselect-dropdown
+				[placeholder]="'Camera List'"
+				[data]="cameraList"
+				[(ngModel)]="selectedCameras"
+				[settings]="dropdownSettings">
+		</ng-multiselect-dropdown>
+	</div>
 </div>
 
 <div [ngClass]="['collage']">
+	<div [ngClass]="['camera']">
+		<camera [cameraPictures]="cameraPictures"></camera>
+	</div>
 </div>

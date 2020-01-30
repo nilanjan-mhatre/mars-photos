@@ -38,5 +38,10 @@ export class NasaService {
         return marsRover;
     }
 
-
+    getFilteredResultsBySol(sol:Number):Observable<any> {
+        let params:HttpParams = new HttpParams()
+            .set(AppSettings.API_KEY_PARAM, AppSettings.API_KEY)
+            .set(AppSettings.API_SOL_PARAM, sol.toString());
+        return this.http.get(AppSettings.API_ENDPOINT + AppSettings.API_URL_PHOTOS, {params});
+    }
 }
