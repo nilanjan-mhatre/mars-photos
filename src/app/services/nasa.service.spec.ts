@@ -9,10 +9,10 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { CameraComponent } from '../components/camera.component';
 import { HomeComponent } from '../components/home.component';
 import { AppComponent } from '../app.component';
-import { roverDetailsMockObj } from '../config/mock.data';
+import { roverDetailsMockObj, photoDataMockJson } from '../config/mock.data';
 import { MarsRover } from '../models/marsRover.model';
 
-describe('CameraComponent', () => {
+describe('NasaService', () => {
     let injector:TestBed;
     let nasaService:NasaService;
 
@@ -42,5 +42,11 @@ describe('CameraComponent', () => {
         expect(marsRover.maxSol).toEqual(2540);
         expect(marsRover.totalPhotos).toEqual(366206);
         expect(marsRover.cameraList.length).toEqual(7);
+    });
+
+    it('should parse photo json details to extract image URLs', () => {
+        let imageUrlList:String[] = nasaService.parseImageUrlJson(photoDataMockJson);
+        expect(imageUrlList[0]).toEqual("https://mars.jpl.nasa.gov/msl-raw-images/proj/msl/redops/ods/surface/sol/00333/opgs/edr/fcam/FRB_427047830EDR_F0070368FHAZ00323M_.JPG");
+        expect(imageUrlList.length).toEqual(4);
     });
 });

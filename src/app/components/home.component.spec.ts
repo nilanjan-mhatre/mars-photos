@@ -8,6 +8,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { CommonModule } from '@angular/common';
+import { MarsRover } from '../models/marsRover.model';
+import { mockRover } from '../config/mock.data';
 
 describe('HomeComponent', () => {
     let fixture:ComponentFixture<HomeComponent>;
@@ -36,5 +38,12 @@ describe('HomeComponent', () => {
 
     it('should have a header h1', () => {
         expect(compiled.querySelector('h1').textContent).toContain('Curiosity Images');
+    });
+
+    it('should display details of launch and land date', () => {
+        let rover:MarsRover = mockRover;
+        let comp:HomeComponent = fixture.componentInstance;
+        comp.marsRover = rover;
+        // expect(compiled.querySelector('.header > h3 > span:nth-child(1)').textContent).toContain('La');
     });
 });
