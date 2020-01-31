@@ -1,8 +1,10 @@
-<h2>{{cameraPictures.cameraFullName}}</h2>
-<h3>Total Images: {{cameraPictures.imageUrl.length}}</h3>
-
-<button id="prev" class="img" (click)="previousImage($event)" type="button">prev</button>
-<div class="img-container">
-    <img [src]="currentImage" class="img" style="width:100%">
+<div [ngClass]="['camera-header']">
+    <h2>{{camera.fullName}}</h2>
+    <h3>Image: {{currentIndex + 1}} of {{imageUrlList.length}}</h3>
 </div>
-<button id="next" class="img" (click)="nextImage($event)" type="button">next</button>
+<button id="prev" class="img" (click)="previousImage($event)" type="button">^</button>
+
+<div class="img-container">
+    <img *ngIf="currentImage != '' && currentImage != null" [src]="currentImage" class="img" style="width:100%">
+</div>
+<button id="next" class="img" (click)="nextImage($event)" type="button">v</button>

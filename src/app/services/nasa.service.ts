@@ -12,16 +12,16 @@ export class NasaService {
     constructor(private http: HttpClient) {
     }
 
-    getRoverDetails():Observable<any> {
-        let params:HttpParams = new HttpParams()
+    getRoverDetails(): Observable<any> {
+        let params: HttpParams = new HttpParams()
                     .set(AppSettings.API_KEY_PARAM, AppSettings.API_KEY);
         return this.http.get(AppSettings.API_ENDPOINT, {params});
     }
 
-    parseRoverDetails(data: Object):MarsRover {
-        let marsRover:MarsRover = emptyRover;
+    parseRoverDetails(data: Object): MarsRover {
+        let marsRover: MarsRover = emptyRover;
         if(data != null && data['rover'] != null) {
-            let rover:Object = data['rover'];
+            let rover: Object = data['rover'];
 
             marsRover.name = rover['name'];
             marsRover.landDate = rover['landing_date'];
@@ -29,7 +29,7 @@ export class NasaService {
             marsRover.maxSol = rover['max_sol'];
             marsRover.totalPhotos = rover['total_photos'];
             rover['cameras'].forEach(cam => {
-                let newCam:Camera = new Camera();
+                let newCam: Camera = new Camera();
                 newCam.name = cam['name'];
                 newCam.fullName = cam['full_name'];
                 marsRover.cameraList.push(newCam);
@@ -38,10 +38,22 @@ export class NasaService {
         return marsRover;
     }
 
-    getFilteredResultsBySol(sol:Number):Observable<any> {
-        let params:HttpParams = new HttpParams()
+    getFilteredPhotosByCameraAndSol(sol: Number, cameraName: String): Observable<any> {
+        let params: HttpParams = new HttpParams()
             .set(AppSettings.API_KEY_PARAM, AppSettings.API_KEY)
-            .set(AppSettings.API_SOL_PARAM, sol.toString());
+            .set(AppSettings.SOL_PARAM, sol.toString())
+            .set(AppSettings.CAMERA_PARAM, cameraName.toString());
         return this.http.get(AppSettings.API_ENDPOINT + AppSettings.API_URL_PHOTOS, {params});
+    }
+
+    parseImageUrlJson(data: Object): String[] {
+        let imageUrlList: String[] = [];
+        if(data != null && data["photos"] != null) {
+            let imageObjList:Object[] = data["photos"];
+            imageObjList.forEach(imgObj => {
+                imageUrlList.push(imgObj["img_src"]);
+            });
+        }
+        return imageUrlList;
     }
 }

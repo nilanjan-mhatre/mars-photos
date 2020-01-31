@@ -1,13 +1,19 @@
 <div [ngClass]="['header']">
-	<h1>Curiosity Images</h1>
-	<h3>Launched:{{marsRover.launchDate}}</h3>
-	<h3>Landed:{{marsRover.landDate}}</h3>
+	<h1>Mars Rover | Curiosity Images</h1>
+	<h3>
+		<span>Launch Date: {{marsRover.launchDate}}</span>
+		<span>Landed: {{marsRover.landDate}}</span>
+		<span>Total photos: {{marsRover.totalPhotos}}</span>
+		<span>Total days spent: {{marsRover.maxSol}}</span>
+	</h3>
 </div>
 
 <div [ngClass]="['filters']">
 	<div [ngClass]="['filter', 'text-input']">
+		<span>Sol</span>
 		<input type="text"
-			ng-model="selectedSol"
+			[(ngModel)]="modelSol"
+			(change)="copySolValue()"
 			type="number"
 			name="sol"
 			min="0"
@@ -15,17 +21,24 @@
 			required="true">
 	</div>
 	<div [ngClass]="['filter', 'drop-down']">
+		<span>Cameras</span>
 		<ng-multiselect-dropdown
 				[placeholder]="'Camera List'"
 				[data]="cameraList"
 				[(ngModel)]="selectedCameras"
-				[settings]="dropdownSettings">
+				[settings]="dropdownSettings"
+				(onSelect)="onSelectCamera($event)"
+				(onDeSelect)="onUnSelectCamera($event)"
+				(onSelectAll)="onSelectAllCamera($event)"
+				(onDeSelectAll)="onUnSelectAllCamera($event)">
 		</ng-multiselect-dropdown>
 	</div>
 </div>
 
 <div [ngClass]="['collage']">
-	<div [ngClass]="['camera']">
-		<camera [cameraPictures]="cameraPictures"></camera>
+	<div *ngFor="let camera of viewCameras">
+		<div *ngIf="camera.view" [ngClass]="['camera']">
+			<camera [sol]="selectedSol" [camera]="camera"></camera>
+		</div>
 	</div>
 </div>
