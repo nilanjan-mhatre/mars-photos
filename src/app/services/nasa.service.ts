@@ -51,7 +51,8 @@ export class NasaService {
         if(data != null && data["photos"] != null) {
             let imageObjList:Object[] = data["photos"];
             imageObjList.forEach(imgObj => {
-                imageUrlList.push(imgObj["img_src"]);
+                let url:String = imgObj["img_src"];
+                imageUrlList.push(url.replace("http:", "https:"));
             });
         }
         return imageUrlList;
